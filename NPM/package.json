@@ -1,0 +1,19 @@
+{
+  "name": "learning-npm",
+  "version": "1.0.0",
+  "description": "i am learning about npm",
+  "license": "ISC",
+  "author": "bot235",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@apiverve/superheroname": "^1.1.12",
+    "@fakerjs/superhero": "^1.2.0",
+    "inquirer": "^13.2.2",
+    "qr-image": "^3.2.0",
+    "sillyname": "^0.1.0"
+  }
+}
