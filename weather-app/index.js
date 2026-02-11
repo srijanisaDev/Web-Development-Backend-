@@ -13,7 +13,7 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-const API_KEY = "YOUR_API_KEY_HERE";
+const API_KEY = "api-key";
 
 app.get("/", (req, res) => {
     res.render("index");
