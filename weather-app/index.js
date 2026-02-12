@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());
 
-const API_KEY = "a29920eeae811a0751328bb3dc57980b";
+const API_KEY = "api-key";
 
 app.get("/", (req, res) => {
     res.render("index");
