@@ -12,29 +12,61 @@ const port = 3000;
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+app.use(express.json());
 
-const API_KEY = "api-key";
+const API_KEY = "a29920eeae811a0751328bb3dc57980b";
 
 app.get("/", (req, res) => {
     res.render("index");
 });
 
+// -------- CITY SEARCH ROUTE --------
 app.post("/weather", async (req, res) => {
-    const city = req.body.city;
+
+    const city = req.body.city.trim();
 
     try {
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`;
 
         const response = await axios.get(url);
-
         const data = response.data;
 
         const weatherData = {
             city: data.name,
+            country: data.sys.country,
             temperature: data.main.temp,
             description: data.weather[0].description,
             humidity: data.main.humidity,
-            wind: data.wind.speed
+            wind: data.wind.speed,
+            icon: data.weather[0].icon
+        };
+
+        res.render("result", { weather: weatherData });
+
+    } catch (error) {
+        console.log(error.response?.data || error.message);
+        res.render("result", { weather: null });
+    }
+});
+
+// -------- LOCATION ROUTE --------
+app.post("/location-weather", async (req, res) => {
+    const { lat, lon } = req.body;
+
+    try {
+        const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+
+        const response = await axios.get(url);
+        const data = response.data;
+
+        const weatherData = {
+            city: data.name,
+            country: data.sys.country,
+            temperature: data.main.temp,
+            description: data.weather[0].description,
+            humidity: data.main.humidity,
+            wind: data.wind.speed,
+            icon: data.weather[0].icon
         };
 
         res.render("result", { weather: weatherData });

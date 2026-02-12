@@ -1,15 +1,174 @@
+/* ===== GLOBAL RESET ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ===== BODY ===== */
 body {
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    overflow: hidden;
+    color: white;
+}
+
+/* ===== MAIN CONTAINER ===== */
+.container {
     text-align: center;
-    font-family: Arial;
-    margin-top: 50px;
-
+    animation: fadeIn 0.8s ease-in-out;
 }
 
+/* ===== HEADINGS ===== */
+.title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+/* ===== GLASS CARD ===== */
+.card {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 15px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); /* Safari support */
+
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    width: 320px;
+    transition: 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== INPUT FIELD ===== */
 input {
-    padding: 10px;
-    margin: 10px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 15px;
+    outline: none;
+    font-size: 1rem;
 }
 
+/* ===== BUTTONS ===== */
 button {
-    padding: 10px 20px;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    background: white;
+    color: #333;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #f0f0f0;
+    transform: scale(1.02);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+    margin: 20px 0;
+    position: relative;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* ===== LOCATION BUTTON ===== */
+.location-btn {
+    margin-top: 10px;
+}
+
+/* ===== RESULT PAGE ===== */
+.result-card {
+    width: 350px;
+}
+
+.city {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.weather-icon {
+    width: 100px;
+}
+
+.temperature {
+    font-size: 3rem;
+    margin: 10px 0;
+}
+
+.description {
+    font-size: 1.2rem;
+    text-transform: capitalize;
+    margin-bottom: 20px;
+}
+
+.details p {
+    margin: 5px 0;
+    font-size: 0.95rem;
+}
+
+/* ===== BACK BUTTON ===== */
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background: white;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+/* ===== FADE ANIMATION ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+    .card {
+        width: 90%;
+        padding: 25px;
+    }
+
+    .title {
+        font-size: 2.2rem;
+    }
+
+    .temperature {
+        font-size: 2.5rem;
+    }
 }

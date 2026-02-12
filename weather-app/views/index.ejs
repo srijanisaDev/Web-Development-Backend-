@@ -1,17 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Weather App</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Weather App</title>
     <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-    <h1>Weather App</h1>
+    <div class="container">
 
-    <form action="/weather" method="POST">
-        <input type="text" name="city" placeholder="Enter City Name" required>
-        <button type="submit">Get Weather</button>
-    </form>
+        <h1 class="title">The Weather App</h1>
+        <p class="subtitle">Discover the weather around you instantly 🌍</p>
+
+        <div class="card">
+
+            <!-- CITY SEARCH FORM -->
+            <form action="/weather" method="POST">
+                
+                <input 
+                    type="text" 
+                    name="city" 
+                    placeholder="Enter your city..."
+                    required
+                >
+
+                <!-- Optional Unit Toggle -->
+                
+
+                <button type="submit">Check Weather</button>
+
+            </form>
+
+            <div class="divider">
+                <span>OR</span>
+            </div>
+
+            <!-- LOCATION BUTTON -->
+            <button type="button" class="location-btn" onclick="getLocation()">
+                📍 Use My Current Location
+            </button>
+
+        </div>
+
+    </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendPosition, showError);
+            } else {
+                alert("Geolocation not supported by this browser.");
+            }
+        }
+
+        function sendPosition(position) {
+            fetch("/location-weather", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                })
+            })
+            .then(res => res.text())
+            .then(html => {
+                document.open();
+                document.write(html);
+                document.close();
+            })
+            .catch(err => {
+                alert("Something went wrong while fetching weather.");
+                console.error(err);
+            });
+        }
+
+        function showError(error) {
+            alert("Unable to retrieve your location.");
+            console.error(error);
+        }
+    </script>
 
 </body>
 </html>
